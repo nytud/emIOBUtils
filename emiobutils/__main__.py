@@ -11,8 +11,9 @@ def main():
     argparser.add_argument('--output-field-name', help='The name of the output field (must be unique)', required=True,
                            metavar='FIELD-NAME')
     argparser.add_argument('--output-style', help='The name of the output span notation style', required=True,
-                           choices={'iob1', 'iob2', 'bio', 'ioe1', 'ioe2', 'io', 'sbieo', 'iobes', 'noprefix', 'bilou',
-                                    'IOB1', 'IOB2', 'BIO', 'IOE1', 'IOE2', 'IO', 'SBIEO', 'IOBES', 'NOPREFIX', 'BILOU'},
+                           choices={'iob1', 'iob2', 'bio', 'ioe1', 'ioe2', 'io', 'sbieo', 'iobes', 'iobe1', 'noprefix',
+                                    'bilou', 'IOB1', 'IOB2', 'BIO', 'IOE1', 'IOE2', 'IO', 'SBIEO', 'IOBES', 'IOBE1',
+                                    'NOPREFIX', 'BILOU'},
                            metavar='STYLE')
     opts = argparser.parse_args()  # TODO: Add multiple modes...
 

@@ -42,12 +42,12 @@ class EmIOBUtils:
     def __init__(self, out_style, background_label='O', source_fields=None, target_fields=None):
         self._style = {'iob1': self._iob1, 'iob2': self._iob2_bio, 'bio': self._iob2_bio, 'ioe1': self._ioe1,
                        'ioe2': self._ioe2, 'io': self._io, 'sbieo': self._sbieo_iobes, 'iobes': self._sbieo_iobes,
-                       'noprefix': self._noprefix, 'bilou': self._bilou}
+                       'iobe1': self._iobe1, 'noprefix': self._noprefix, 'bilou': self._bilou}
         self._conv_fun = self._style[out_style.lower()]
         self._background_label = background_label
 
-        self._bsu = {'B', 'S', 'U'}
-        self._elsu = {'E', 'L', 'S', 'U'}
+        self._bs1u = {'B', 'S', '1', 'U'}
+        self._els1u = {'E', 'L', 'S', '1', 'U'}
 
         # Field names for e-magyar TSV
         if source_fields is None:
@@ -117,6 +117,18 @@ class EmIOBUtils:
         return f'{prefix}-{base}'
 
     @staticmethod
+    def _iobe1(is_first, is_last, is_start_adjacent_same, is_end_adjacent_same, base):
+        if is_first and is_last:
+            prefix = '1'
+        elif not is_first and is_last:
+            prefix = 'E'
+        elif is_first and not is_last:
+            prefix = 'B'
+        else:
+            prefix = 'I'
+        return f'{prefix}-{base}'
+
+    @staticmethod
     def _noprefix(is_first, is_last, is_start_adjacent_same, is_end_adjacent_same, base):
         return base  # nothing to do as it's just base
 
@@ -160,8 +172,8 @@ class EmIOBUtils:
             previous_base, previous_prefix = self._split_label(previous_label)
             next_base, next_prefix = self._split_label(next_label)
 
-            is_start_adjacent_same = previous_base == base and (prefix in self._bsu or previous_prefix in self._elsu)
-            is_end_adjacent_same = base == next_base and (next_prefix in self._bsu or prefix in self._elsu)
+            is_start_adjacent_same = previous_base == base and (prefix in self._bs1u or previous_prefix in self._els1u)
+            is_end_adjacent_same = base == next_base and (next_prefix in self._bs1u or prefix in self._els1u)
             is_first = previous_base != base or is_start_adjacent_same
             is_last = base != next_base or is_end_adjacent_same
 

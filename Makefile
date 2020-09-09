@@ -16,6 +16,7 @@ test:
 	@echo "Running tests..."
 	cd /tmp && python3 -m emiobutils -i $(DIR)/tests/test_data.in --input-field-name NP-BIO --output-field-name NP-IOBES --output-style IOBES | diff - $(DIR)/tests/test_data.out.iobes && cd ${CURDIR}
 	cd /tmp && python3 -m emiobutils -i $(DIR)/tests/test_data.in --input-field-name NP-BIO --output-field-name NP-SBIEO --output-style SBIEO | diff - $(DIR)/tests/test_data.out.sbieo && cd ${CURDIR}
+	cd /tmp && python3 -m emiobutils -i $(DIR)/tests/test_data.in --input-field-name NP-BIO --output-field-name NP-IOBE1 --output-style IOBE1 | diff - $(DIR)/tests/test_data.out.iobe1 && cd ${CURDIR}
 	cd /tmp && python3 -m emiobutils -i $(DIR)/tests/test_data.in --input-field-name NP-BIO --output-field-name NP-IOB1 --output-style IOB1 | diff - $(DIR)/tests/test_data.out.iob1 && cd ${CURDIR}
 	cd /tmp && python3 -m emiobutils -i $(DIR)/tests/test_data.in --input-field-name NP-BIO --output-field-name NP-IOB2 --output-style IOB2 | diff - $(DIR)/tests/test_data.out.iob2 && cd ${CURDIR}
 	cd /tmp && python3 -m emiobutils -i $(DIR)/tests/test_data.in --input-field-name NP-BIO --output-field-name NP-IOE1 --output-style IOE1 | diff - $(DIR)/tests/test_data.out.ioe1 && cd ${CURDIR}

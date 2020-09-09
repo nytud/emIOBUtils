@@ -6,8 +6,8 @@
 from itertools import permutations
 
 # All possible labels with two groups
-labels = {'B-NP', 'I-NP', 'E-NP', 'S-NP', 'L-NP', 'U-NP', 'NP', 'O',
-          'B-VP', 'I-VP', 'E-VP', 'S-VP', 'L-VP', 'U-VP', 'VP'}
+labels = {'B-NP', 'I-NP', 'E-NP', 'S-NP', '1-NP', 'L-NP', 'U-NP', 'NP', 'O',
+          'B-VP', 'I-VP', 'E-VP', 'S-VP', '1-VP', 'L-VP', 'U-VP', 'VP'}
 
 # Write header
 print('form', 'xpos', 'NP-BIO', sep='\t')
