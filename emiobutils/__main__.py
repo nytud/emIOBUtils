@@ -1,4 +1,4 @@
-#!/usr/bin/env pyhton3
+#!/usr/bin/env python3
 # -*- coding: utf-8, vim: expandtab:ts=4 -*-
 
 from xtsv import build_pipeline, parser_skeleton, jnius_config
@@ -18,7 +18,6 @@ def main():
     opts = argparser.parse_args()  # TODO: Add multiple modes...
 
     jnius_config.classpath_show_warning = opts.verbose  # Suppress warning.
-    conll_comments = opts.conllu_comments
 
     # Set input and output iterators...
     if opts.input_text is not None:
@@ -40,14 +39,18 @@ def main():
     tools = [(em_iobutils, ('iobconv', 'emiobutils'))]
 
     # Run the pipeline on input and write result to the output...
-    output_iterator.writelines(build_pipeline(input_data, used_tools, tools, presets, conll_comments))
+    output_iterator.writelines(build_pipeline(input_data, used_tools, tools, presets, opts.conllu_comments))
 
     # TODO this method is recommended when debugging the tool
     # Alternative: Run specific tool for input (still in emtsv format):
-    # output_iterator.writelines(process(input_iterator, inited_tools[used_tools[0]]))
+    # from xtsv import process
+    # from emdummy import EmDummy
+    # output_iterator.writelines(process(input_data, EmDummy(*em_dummy[3], **em_dummy[4])))
 
     # Alternative2: Run REST API debug server
-    # app = pipeline_rest_api('TEST', inited_tools, presets,  False)
+    # from xtsv import pipeline_rest_api, singleton_store_factory
+    # app = pipeline_rest_api('TEST', tools, {},  conll_comments=False, singleton_store=singleton_store_factory(),
+    #                         form_title='TEST TITLE', doc_link='https://github.com/dlt-rilmta/emdummy')
     # app.run()
 
 
