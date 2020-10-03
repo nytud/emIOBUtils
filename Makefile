@@ -135,5 +135,6 @@ __release:
 	@git add $(MODULE)/version.py
 	@git commit -m "Release $(NEWVER)"
 	@git tag -a "v$(NEWVER)" -m "Release $(NEWVER)"
+	@git push
 	@git push --tags
 .PHONY: __release
