@@ -78,6 +78,7 @@ test:
 	| diff -sy --suppress-common-lines - $(DIR)/tests/test_data.out.noprefix 2>&1 | head -n100)
 	time (cd /tmp && python3 -m ${MODULE} -i $(DIR)/tests/${TEST_INPUT} --input-field-name NP-BIO --output-field-name NP-BILOU --output-style BILOU \
 	| diff -sy --suppress-common-lines - $(DIR)/tests/test_data.out.bilou 2>&1 | head -n100)
+	time(cd /tmp && python3 $(DIR)/tests/test_metrics.py)
 
 install-user-test: install-user test
 	@echo "$(green)The test was completed successfully!$(sgr0)"
